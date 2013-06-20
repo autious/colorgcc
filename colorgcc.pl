@@ -43,8 +43,9 @@
 #
 # colorgcc will only emit color codes if:
 #
-#    (1) Its STDOUT is a tty and
+#    (1) Its STDOUT is a tty OR the environment variable CGCC_FORCE_COLOR is defined to anything and
 #    (2) the value of $TERM is not listed in the "nocolor" option.
+#     
 #
 # If colorgcc colorizes the output, the compiler's STDERR will be
 # combined with STDOUT. Otherwise, colorgcc just passes the output from
@@ -215,7 +216,7 @@ $terminal = $ENV{"TERM"} || "dumb";
 
 # If it's in the list of terminal types not to color, or if
 # we're writing to something that's not a tty, don't do color.
-if (! -t STDOUT || $nocolor{$terminal})
+if ((! -t STDOUT &&  !(defined $ENV{'CGCC_FORCE_COLOR'})) || $nocolor{$terminal})
 {
   exec $compiler, @ARGV
   or die("Couldn't exec");

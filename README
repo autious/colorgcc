@@ -38,7 +38,7 @@ Note:
 
 colorgcc will only emit color codes if:
 
-   (1) Its STDOUT is a tty and
+   (1) Its STDOUT is a tty or the environment variable CGCC_FORCE_COLOR is defined to anything and
    (2) the value of $TERM is not listed in the "nocolor" option.
 
 If colorgcc colorizes the output, the compiler's STDERR will be
